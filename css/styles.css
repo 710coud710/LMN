@@ -109,11 +109,15 @@ body {
     align-items: center;
     padding: 6rem 2rem 2rem;
     background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-content {
     flex: 1;
     padding-right: 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .hero h1 {
@@ -138,12 +142,30 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 168, 255, 0.1) 100%);
+    border-radius: 20px;
+    z-index: -1;
 }
 
 .hero-image img {
     max-width: 100%;
+    height: auto;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+    background: transparent;
+    mix-blend-mode: multiply;
 }
 
 /* Personal Info Section */
@@ -326,10 +348,32 @@ body {
     margin-top: 2rem;
 }
 
+.school-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.school-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 168, 255, 0.1) 100%);
+    border-radius: 20px;
+    z-index: 1;
+}
+
 .school-image img {
     width: 100%;
+    height: auto;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+    background: transparent;
+    mix-blend-mode: multiply;
 }
 
 /* Contact Section */
@@ -466,6 +510,7 @@ body {
     .hero-image img {
         max-width: 300px;
         margin: 0 auto;
+        height: auto;
     }
 
     /* Personal Info Mobile */
@@ -546,6 +591,7 @@ body {
 
     .school-image img {
         max-width: 100%;
+        height: auto;
     }
 
     /* Contact Section Mobile */
@@ -648,8 +694,10 @@ body {
 
 /* High-DPI Screens */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .hero-image img {
+    .hero-image img,
+    .school-image img {
         image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
     }
 }
 
@@ -679,6 +727,12 @@ body {
     .school,
     .contact {
         padding: 1rem 0;
+    }
+
+    .hero-image img,
+    .school-image img {
+        filter: grayscale(100%);
+        box-shadow: none;
     }
 }
 
